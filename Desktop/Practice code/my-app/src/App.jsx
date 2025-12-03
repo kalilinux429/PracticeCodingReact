@@ -1,20 +1,15 @@
 import { useState } from 'react'
 import './App.css'
-import { ButtonGroupButtonContext } from '@mui/material';
+import { studentsList,initialProducts ,users} from './constants/data'
 
 
-const studentsList = [
-  { rollNo: 1111, name: "name1" },
-  { rollNo: 2222, name: "name2" },
-  {rollNo:3333,name:"suresh"},
-  {rollNo:4444, name:"stalin"},
-  {rollNo:55555,name:"sumit"}
-];
 function App() {
 const [student,setStudent]=useState(studentsList)
+const [product,setProduct]=useState(initialProducts)
 const [username,setUserame]=useState('');
 const [userroll,setUserRoll]=useState('')
 const [error,setError]=useState(false)
+const [select,setSelect]=useState('')
 
 function handleChange(e){
   const newValue=e.target.value;
@@ -37,6 +32,14 @@ function updateName(){
   setUserRoll('')
 }
 
+function increseQty(id){
+  const updated=product.map((item)=>
+    item.id ===id?{...item,qty:item.qty+1}:item
+  )
+  setProduct(updated)
+
+}
+
 
 
   return (
@@ -55,6 +58,27 @@ function updateName(){
 
     
       <button onClick={updateName}>Update  Name</button>
+        {/* increse product quantitiy */}
+        <h1>Quantitiy list</h1>
+
+        <ul>
+          {product.map((item)=>
+          <li key={item.id}>{item.price}:{item.qty} <button onClick={()=>increseQty(item.id)}>+</button></li>
+          
+        )
+      
+          }
+        </ul>
+
+        {/* option list */}
+        <select onChange={(e)=>setSelect(e.target.value)} value={select}>
+          <option >User name</option>
+          {users.map((item)=>
+          <option key={item.id} value={item.id}>{item.name}</option>
+          )}
+        </select>
+
+      <p>{select && <span>user selected {select}</span>}</p>
       
     </>
   )
