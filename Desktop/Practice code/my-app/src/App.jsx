@@ -13,21 +13,31 @@ const studentsList = [
 function App() {
 const [student,setStudent]=useState(studentsList)
 const [username,setUserame]=useState('');
-const [userroll,setUserRoll]=useState()
+const [userroll,setUserRoll]=useState('')
+const [error,setError]=useState(false)
 
 function handleChange(e){
   const newValue=e.target.value;
   // console.log( typeof newValue, newValue)
   setUserRoll(Number(newValue))
+  setError(false)
   // console.log(e)
 }
 
 function updateName(){
+  const findeRoll=student.some((item)=>item.rollNo ===userroll)
+  if(!findeRoll){
+    setError(true)
+  }
   const updated=student.map((item)=>
     item.rollNo === userroll?{...item,name:username}:item
   )
   setStudent(updated)
+  setUserame('')
+  setUserRoll('')
 }
+
+
 
   return (
     <>
@@ -39,8 +49,9 @@ function updateName(){
       ))}
     </ul>
 
-    <input type='number' onChange={handleChange}/>
-        <input type='text' onChange={(e)=>setUserame(e.target.value)}/>
+    <input type='number' value={userroll} onChange={handleChange}/>
+    {error && <span style={{color:'red'}}>enter valid roll number</span>}
+        <input type='text'  value={username} onChange={(e)=>setUserame(e.target.value)}/>
 
     
       <button onClick={updateName}>Update  Name</button>
