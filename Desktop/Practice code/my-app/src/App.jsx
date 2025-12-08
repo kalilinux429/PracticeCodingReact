@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import './App.css'
 import { studentsList,initialProducts ,users} from './constants/data'
+import Parent from './memo_callback_reamemo/Parent'
+import Child from './memo_callback_reamemo/Child'
+
+
 
 
 function App() {
@@ -10,6 +14,8 @@ const [username,setUserame]=useState('');
 const [userroll,setUserRoll]=useState('')
 const [error,setError]=useState(false)
 const [select,setSelect]=useState('')
+const [count,setCout]=useState(0)
+console.log('app render')
 
 function handleChange(e){
   const newValue=e.target.value;
@@ -79,9 +85,21 @@ function increseQty(id){
         </select>
 
       <p>{select && <span>user selected {select}</span>}</p>
+      <Parent/>
+      <Child/>
+      <button onClick={()=>setCout(count+1)}>increse</button>
+      <p>{count}</p>
       
     </>
   )
 }
 
 export default App
+
+
+//component rerender pattern
+
+// 🧠 Yes, React will re-run all child components in that tree…
+// …but memoized components (React.memo) can SKIP their render if their props didn’t change.
+
+// Let’s break it dow
