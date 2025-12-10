@@ -3,6 +3,8 @@ import './App.css'
 import { studentsList,initialProducts ,users} from './constants/data'
 import Parent from './memo_callback_reamemo/Parent'
 import Child from './memo_callback_reamemo/Child'
+import { FilterList } from './filterlist/FilterList'
+import { Timer } from './timer/Timer'
 
 
 
@@ -89,6 +91,8 @@ function increseQty(id){
       <Child/>
       <button onClick={()=>setCout(count+1)}>increse</button>
       <p>{count}</p>
+      <FilterList/>
+      <Timer/>
       
     </>
   )
