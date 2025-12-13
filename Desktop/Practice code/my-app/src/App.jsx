@@ -5,6 +5,8 @@ import Parent from './memo_callback_reamemo/Parent'
 import Child from './memo_callback_reamemo/Child'
 import { FilterList } from './filterlist/FilterList'
 import { Timer } from './timer/Timer'
+import Table from './table mapping/Table'
+import { Fetchapi } from './fetchaapi/Fetchapi'
 
 
 
@@ -53,6 +55,8 @@ function increseQty(id){
   return (
     <>
     <h1>React problem solutions</h1>
+    <Fetchapi/>
+    <Table/>
     <ul>
       {student.map((item,i)=>(
         <li key={i}>{item.rollNo}: {item.name}</li>
